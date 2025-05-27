@@ -1,0 +1,25 @@
+cd /home/master/CR-FIQA
+
+conda activate Fedfrenv
+
+CR-FIQA(L)
+
+python3 evaluation/getQualityScore.py --data-dir "/home/master/FedFR-main/ms1m_split/split_pretrain_6000" --datasets "/home/master/FedFR-main/ms1m_split/split_pretrain_6000/client_0000/train" --model_path "pretrained" --backbone "iresnet100" --model_id "181952" --score_file_name "CRFIQAL_0000.txt" --color_channel "RGB"
+
+for i in $(seq -w 0 39); do
+    CLIENT_ID="client_00$i"
+    SCORE_FILE_NAME="CRFIQAL_00$i.txt"
+    DATASET_DIR="/home/master/FedFR-main/ms1m_split/split_train_i4000c0040/$CLIENT_ID/train"
+    python3 evaluation/getQualityScore.py \
+        --data-dir "/home/master/FedFR-main/ms1m_split/split_train_i4000c0040" \
+        --datasets "$DATASET_DIR" \
+        --model_path "pretrained" \
+        --backbone "iresnet100" \
+        --model_id "181952" \
+        --score_file_name "$SCORE_FILE_NAME" \
+        --color_channel "RGB"
+done
+
+CR-FIQA(S)
+
+python3 evaluation/getQualityScore.py --data-dir "data" --datasets "lfw" --model_path "pretrained" --backbone "iresnet50" --model_id "32572" --score_file_name "CRFIQAS.txt" --color_channel "BGR"

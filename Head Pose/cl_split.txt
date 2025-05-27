@@ -1,0 +1,42 @@
+## clients
+cd C:\Users\deeve\Desktop\OpenFace
+
+@echo off
+for /l %i in (0,1,9) do (
+FeatureExtraction.exe -fdir D:\Research\Tubitak\Head_pose_split\Training_33-33-33\split_train_i4000c0040\client_0039\cl_images\00000%i -pose
+)
+
+for /l %i in (10,1,99) do (
+FeatureExtraction.exe -fdir D:\Research\Tubitak\Head_pose_split\Training_33-33-33\split_train_i4000c0040\client_0039\cl_images\0000%i -pose
+)
+
+
+
+@echo off
+for /l %c in (19,1,39) do (
+    for /l %i in (10,1,99) do (
+        FeatureExtraction.exe -fdir D:\Research\Tubitak\Head_pose_split\Training_33-33-33\split_train_i4000c0040\client_00%c\cl_images\0000%i -pose
+    )
+)
+
+
+
+## split pretrain
+cd C:\Users\deeve\Desktop\OpenFace
+
+@echo off
+for /l %i in (0,1,9) do (
+FeatureExtraction.exe -fdir D:\Research\Tubitak\Head_pose_split\pretrain_images_6000\00000%i -pose
+)
+
+for /l %i in (10,1,99) do (
+FeatureExtraction.exe -fdir D:\Research\Tubitak\Head_pose_split\pretrain_images_6000\0000%i -pose
+)
+
+for /l %i in (100,1,999) do (
+FeatureExtraction.exe -fdir D:\Research\Tubitak\Head_pose_split\pretrain_images_6000\000%i -pose
+)
+
+for /l %i in (1000,1,5999) do (
+FeatureExtraction.exe -fdir D:\Research\Tubitak\Head_pose_split\pretrain_images_6000\00%i -pose
+)
