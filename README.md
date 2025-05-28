@@ -1,4 +1,4 @@
-# Semi-Supervised Federated Face Recognition (SSFedFR)
+# Curriculum Learning for Federated Face Recognition
 
 This repository presents a **Semi-Supervised Federated Face Recognition (SSFedFR)** approach that leverages **partially labeled local datasets** and curriculum learning strategies to improve model performance across clients.
 
