@@ -7,10 +7,6 @@ This section explains how the Certainty Ratio Face Image Quality Assessment **(C
 
 <img src="CRFIQA_sort.png"> 
 
-<p align="center">
-  <img src="CRFIQA_sort.png" alt="CR-FIQA sorting visualization">
-</p>
-
 ## Overview
 
 We propose a two-stage curriculum learning strategy based on **CR-FIQA** scores. The training begins with high-quality (easy) images and progressively incorporates more difficult samples.
@@ -28,3 +24,7 @@ The sorted images are then fed to the [FedFR](https://ojs.aaai.org/index.php/AAA
 
 **Stage 1**: Train on the **top 50%** of images (those with the highest CR-FIQA scores).
 **Stage 2**: Use the model parameters from Stage 1 as initialization and train on **all** images.
+
+## Reference
+
+Boutros, F., Fang, M., Klemt, M., Fu, B., & Damer, N. (2023). CR-FIQA: face image quality assessment by learning sample relative classifiability. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition (pp. 5836-5845).
