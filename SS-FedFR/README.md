@@ -13,7 +13,7 @@ We used a similar strategy to select a subset of the [MS-Celeb-1M](https://doi.o
 
 Put the pretrained model (["backbone.pth"](https://drive.google.com/file/d/19d-Qm-RkBh9E2P1o_ZbdrHAyoZocFZbK/view?usp=sharing)) under the `pretrain/` folder.
 
-## Semi-Supervised Training
+## Semi-Supervised Learning
 
 - Pseudo-labeling:
   - We added two new parameters to the `run.sh` command as *threshold* and *split_ratio*. The threshold is the pseudo-labeling confidence and the split_ratio defines the proportion of labeled and unlabeled data in the clients (e.g. 0.2 → 20% labeled 80% unlabeled).
