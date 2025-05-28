@@ -46,8 +46,8 @@ We propose a two-stage curriculum learning strategy based on **CR-FIQA** scores.
 
 - **CR-FIQA Framework**: Estimates the **Face Image Quality (FIQ)** of each sample by learning to predict the **relative classifiability** of images.
 - **Image Sorting**: Each image is scored using CR-FIQA and sorted in **descending order** based on quality.  
-  - **High scores** → Easy-to-classify images  
-  - **Low scores** → Hard-to-classify images
+  - 🟩 **High scores** → Easy-to-classify images  
+  - 🟥 **Low scores** → Hard-to-classify images
 
 ## Training Strategy
 
@@ -58,4 +58,4 @@ The sorted images are then used to train the [FedFR](https://ojs.aaai.org/index.
 
 ## References
 
-Boutros, F., Fang, M., Klemt, M., Fu, B., & Damer, N. (2023). CR-FIQA: Face image quality assessment by learning sample relative classifiability. In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition* (pp. 5836–5845).
+Boutros, F., Fang, M., Klemt, M., Fu, B., & Damer, N. (2023). CR-FIQA: Face Image Quality Assessment by Learning Sample Relative Classifiability. In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition* (pp. 5836–5845).
