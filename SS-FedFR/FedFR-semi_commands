@@ -1,12 +1,12 @@
-cd /home/master/FedFR-semi/split_dataset
+cd /home/master/SS-FedFR/split_dataset
 
 
 Generate FL dataset
-python3 split_FL.py --data_dir '/home/master/FedFR-semi/faces_emore' --output_dir '/home/master/FedFR-semi/ms1m_split' --num_ID 4000 --num_client 40
+python3 split_FL.py --data_dir '/home/master/SS-FedFR/faces_emore' --output_dir '/home/master/SS-FedFR/ms1m_split' --num_ID 4000 --num_client 40
 
 
 Generate Pretrained dataset
-python3 split_pretrain.py --data_dir '/home/master/FedFR-semi/faces_emore' --output_dir '/home/master/FedFR-semi/ms1m_split' --num_ID 6000 --num_client 1
+python3 split_pretrain.py --data_dir '/home/master/SS-FedFR/faces_emore' --output_dir '/home/master/SS-FedFR/ms1m_split' --num_ID 6000 --num_client 1
 
 
 Training our FedFR
@@ -14,14 +14,14 @@ sh run.sh
 
 
 Personalized Evaluation: 1:1 Evaluation
-python3 local_all.py --backbone 'multi' --task '1:1' --ckpt_path '/home/master/FedFR-semi/ckpt/FedFR' --data_dir '/home/master/FedFR-semi/ms1m_split/local_veri_4000' --gallery '/home/master/FedFR-semi/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
+python3 local_all.py --backbone 'multi' --task '1:1' --ckpt_path '/home/master/SS-FedFR/ckpt/FedFR' --data_dir '/home/master/SS-FedFR/ms1m_split/local_veri_4000' --gallery '/home/master/SS-FedFR/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
 
 
 Personalized Evaluation: 1:n Evaluation
-python3 local_all.py --backbone 'multi' --task '1:n' --ckpt_path '/home/master/FedFR-semi/ckpt/FedFR' --data_dir '/home/master/FedFR-semi/ms1m_split/local_veri_4000' --gallery '/home/master/FedFR-semi/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
+python3 local_all.py --backbone 'multi' --task '1:n' --ckpt_path '/home/master/SS-FedFR/ckpt/FedFR' --data_dir '/home/master/SS-FedFR/ms1m_split/local_veri_4000' --gallery '/home/master/SS-FedFR/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
 
 
 Generic Evaluation
-python3 ijbc_conti.py --root_path '/media/master/BACKUP/Master_Backup/IJBC' --ckpt_dir '/home/master/FedFR-semi/ckpt/FedFR' --epoch 17 18 19 --gpu 0 1 2 3 --job 'both'
+python3 ijbc_conti.py --root_path '/media/master/BACKUP/Master_Backup/IJBC' --ckpt_dir '/home/master/SS-FedFR/ckpt/FedFR' --epoch 17 18 19 --gpu 0 1 2 3 --job 'both'
 
 

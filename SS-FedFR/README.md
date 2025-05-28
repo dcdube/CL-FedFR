@@ -1,57 +1,51 @@
-# FedFR: Joint Optimization Federated Framework for Generic and Personalized Face Recognition
+# SS-FedFR: Semi-Supervised Federated Face Recognition
 
-[[Paper]](https://ojs.aaai.org/index.php/AAAI/article/view/20057/19816) [[arXiv]](https://arxiv.org/abs/2112.12496)
+This section explains how the SS-FedFR model is trained. This work is based on the **FedFR** algorithm below:
 
-[Chih-Ting Liu](https://jackie840129.github.io/), Chien-Yi Wang, Shao-Yi Chien, Shang-Hong Lai, <br/>Proceedings of the AAAI Conference on Artificial Intelligence (AAAI), 2022
+- 📄 **Paper**: [FedFR: Joint Optimization Federated Framework for Generic and Personalized Face Recognition](https://ojs.aaai.org/index.php/AAAI/article/view/20057)  
+- 💻 **Code**: [FedFR GitHub Repository](https://github.com/jackie840129/FedFR)
 
-## Generate FedFR Dataset
+## Obtain Training Dataset
 
-You can follow the steps in [split_dataset](split_dataset) to generate our pretrained, and FL dataset.
+We used a similar strategy to select a subset of the [MS-Celeb-1M](https://doi.org/10.1007/978-3-319-46487-9_6) as in FedFR. Please follow the steps in [split_dataset](https://github.com/jackie840129/FedFR/tree/main/split_dataset) to obtain the dataset.
 
 ## Prerequisite
 
-1. Put the pretrained model (["backbone.pth"](https://drive.google.com/file/d/19d-Qm-RkBh9E2P1o_ZbdrHAyoZocFZbK/view?usp=sharing)) under the `pretrain/` folder.
+Put the pretrained model (["backbone.pth"](https://drive.google.com/file/d/19d-Qm-RkBh9E2P1o_ZbdrHAyoZocFZbK/view?usp=sharing)) under the `pretrain/` folder.
 
-## Training our FedFR
-1. In `config.py`, you should first change the path of `config.rec` and `config.local_rec`
-2. Run with command `sh run.sh`.
-3. After training, you will have models saved in the checkpoint directory, eg., `ckpt/FedFR/`.
+## Semi-Supervised Training
 
-## Generic Evaluation
+- Pseudo-labeling:
+  - We added two new parameters to the `run.sh` command as *threshold* and *split_ratio*. The threshold is the pseudo-labeling confidence and the split_ratio defines the proportion of labeled and unlabeled data in the clients (e.g. 0.2 → 20% labeled 80% unlabeled).
+  - We added **get_pseudo_labeled_data** function to `client.py` file. It gets the threshold and backbone model as parameters. By using unlabeled data in the client's **train_unlabeled_loader** attribute, it pseudo-labels and filters the samples by threshold and returns the pseudo-labeled dataset. 
+  - We updated **train_with_public_data** function in `client.py` file. Before every local epoch it calls **get_pseudo_labeled_data** function and gets the pseudo-labeled data and combines it with its labeled dataset.
 
-You will evaluate the generic performance on IJBC dataset.
-
-You can use `ijbc_conti.py` to continuously evaluate all checkpoints saved in the directory. (eg. epoch 5 to epoch 11)
-```
-python3 ijbc_conti.py --root_path PATH/TO/IJBC/ --ckpt_dir ckpt/FedFR --epoch 5 6 7 8 9 10 11 \
-        --gpu 0 1 2 3 --job 'both'
-```
-There are two types of job, '1:1' and '1:n', as described in our paper.
-If you want to evaluate both, you can use `--job 'both'`.
+- Training:
+  1. In `config.py`, first change the path of `config.rec` and `config.local_rec`.
+  2. Run with command `sh run.sh`.
+  3. After training, the models will be saved in the checkpoint directory, eg. `ckpt/FedFR/`.
 
 ## Personalized Evaluation
 
-Each model trained by client before FedAvg model aggregation will be used to evaluate the personalized performance.
-
-Furthermore, as described in paper, the backbone and the tranformation layer will be concatenated to generate personalized features.
-
-The evaluation scripts are as follows:
-
-We only provide single checkpoint for some epoch and single type of evaluation ('1:1' or '1:n')
+The personalized performance was evaluated on the [MS-Celeb-1M](https://doi.org/10.1007/978-3-319-46487-9_6). Each model is trained at the client before being aggregated at the server using FedAvg. We evaluated at a specific checkpoint for some epoch and single type of evaluation ('1:1' or '1:n'). Make sure to change the paths.
 
 ### 1:1 Evaluation
 ```
-python3 local_all.py --backbone 'multi' --task '1:1' --ckpt_path ckpt/FedFR \
-                     --data_dir $VERI_DIR --gallery $GALLERY_DIR --epoch 11 --num_client 40 --gpu 0 1 2 3
+python3 local_all.py --backbone 'multi' --task '1:1' --ckpt_path '/home/master/SS-FedFR/ckpt/FedFR' --data_dir '/home/master/SS-FedFR/ms1m_split/local_veri_4000' --gallery '/home/master/SS-FedFR/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
 ```
-- `$VERI_DIR` is the path to 'local_veri_4000' when you split your dataset, eg. '/home/jackieliu/face_recognition/ms1m_split/local_veri_4000'
-- `$GALLERY_DIR` is the path to 'local_gallery_4000', eg. '/home/jackieliu/face_recognition/ms1m_split/local_gallery_4000'
 
 ### 1:n Evaluation
 ```
-python3 local_all.py --backbone 'multi' --task '1:n' --ckpt_path ckpt/FedFR \
-                     --data_dir $VERI_DIR --gallery $GALLERY_DIR --epoch 11 --num_client 40 --gpu 0 1 2 3
+python3 local_all.py --backbone 'multi' --task '1:n' --ckpt_path '/home/master/SS-FedFR/ckpt/FedFR' --data_dir '/home/master/SS-FedFR/ms1m_split/local_veri_4000' --gallery '/home/master/SS-FedFR/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
 ```
-- `$VERI_DIR` is the path to 'local_veri_4000' when you split your dataset, eg. '/home/jackieliu/face_recognition/ms1m_split/local_veri_4000'
-- `$GALLERY_DIR` is the path to 'local_gallery_4000', eg. '/home/jackieliu/face_recognition/ms1m_split/local_gallery_4000'
 
+## Generic Evaluation
+
+The generic performance was evaluated on the [IJB-C](https://ieeexplore.ieee.org/abstract/document/8411217) dataset. We performed 'both' '1:1' or '1:n generic evaluations. Make sure to change the paths.
+```
+python3 ijbc_conti.py --root_path '/media/master/SS-FedFR/IJBC' --ckpt_dir '/home/master/SS-FedFR/ckpt/FedFR' --epoch 17 18 19 --gpu 0 1 2 3 --job 'both'
+```
+
+## References
+
+Liu, C. T., Wang, C. Y., Chien, S. Y., & Lai, S. H. (2022, June). FedFR: Joint optimization federated framework for generic and personalized face recognition. In *Proceedings of the AAAI Conference on Artificial Intelligence* (Vol. 36, No. 2, pp. 1656-1664).
