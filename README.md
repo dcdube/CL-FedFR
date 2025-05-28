@@ -1,45 +1,21 @@
 # Curriculum Learning for Federated Face Recognition
 
-This repository presents a **Semi-Supervised Federated Face Recognition (SSFedFR)** approach that leverages **partially labeled local datasets** and curriculum learning strategies to improve model performance across clients.
+This work proposes a federated FR framework that uses curriculum learning to sort the images from “easy” to “difficult” during training. Two distinct curricula are considered: Face image quality assessment (FIQA) scores and head rotation. The performance of these curriculum designs is assessed both for fully-supervised and semi-supervised federated face recognition setups.
 
 <img src="CL_FedFR.png"> 
 
-## Overview
+## Head Rotation-based Curriculum
 
-In this approach, each client has access to a local dataset that is only **partially labeled**. The training process of the SSFedFR model involves two main components:
+## Face Image Quality-based Curriculum
 
-### 1. Pseudo-Labeling Strategy
+## Fully-Supervised Training
 
-To utilize the **unlabeled data**, we propose a pseudo-labeling method based on **softmax confidence scores**:
+## Semi-Supervised Training
 
-- For each unlabeled image, the model generates class probabilities using the **softmax layer**.
-- If the **maximum class probability** exceeds a predefined **pseudo-labeling confidence threshold**, the image is assigned a pseudo-label.
-- Only pseudo-labeled images with sufficient confidence are included in training.
+## References
 
-This process is formalized in **Algorithm 1**.
+Baltrušaitis, T., Robinson, P., & Morency, L.P. (2016). OpenFace: An open source facial behavior analysis toolkit. In *2016 IEEE Winter Conference on Applications of Computer Vision (WACV)* (pp. 1–10).
 
-### 2. Curriculum Learning Integration
+Boutros, F., Fang, M., Klemt, M., Fu, B., & Damer, N. (2023). CR-FIQA: Face Image Quality Assessment by Learning Sample Relative Classifiability. In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition* (pp. 5836–5845).
 
-To enhance learning, we further integrate **curriculum learning** techniques into the semi-supervised federated training:
-
-- **HR Curriculum**: Based on head pose difficulty (e.g., pitch, yaw, roll angles).
-- **CR-FIQA Curriculum**: Based on image quality assessment using classifiability scores.
-
-The combined training pipeline is illustrated in **Figure 3**.
-
----
-
-## Summary of Contributions
-
-- A **pseudo-labeling function** for confident prediction filtering.
-- Integration of **head pose (HR)** and **CR-FIQA** curricula into semi-supervised federated training.
-- A robust **SSFedFR training strategy** for partially labeled client datasets.
-
----
-
-## Visuals
-
-- **Algorithm 1**: Pseudo-labeling procedure  
-- **Figure 3**: Full training pipeline with curriculum integration
-
----
+Liu, C. T., Wang, C. Y., Chien, S. Y., & Lai, S. H. (2022, June). FedFR: Joint optimization federated framework for generic and personalized face recognition. In *Proceedings of the AAAI Conference on Artificial Intelligence* (Vol. 36, No. 2, pp. 1656-1664).
