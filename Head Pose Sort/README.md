@@ -1,6 +1,6 @@
-# Sorting Images Using Head Pose Angles
+# Sorting Images using Head Pose Angles
 
-This section explains how the **head pose angles** which we estimated using **OpenFace** were used as a curriculum to sort the [MS-Celeb-1M](https://doi.org/10.1007/978-3-319-46487-9_6) dataset images from "easy" to "difficult." To understand how to estimate the **head pose angles**, please refer to the paper and repository below:
+This section explains how the **head pose angles** which we estimated using **OpenFace** were used as a curriculum to sort the [MS-Celeb-1M](https://doi.org/10.1007/978-3-319-46487-9_6) images from "easy" to "difficult." To understand how to estimate the **head pose angles**, please refer to the paper and repository below:
 
 - 📄 **Paper**: [OpenFace: An open source facial behavior analysis toolkit](https://ieeexplore.ieee.org/abstract/document/7477553)  
 - 💻 **Code**: [OpenFace GitHub Repository](https://github.com/TadasBaltrusaitis/OpenFace)
