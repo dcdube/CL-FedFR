@@ -1,5 +1,5 @@
 
-# Curriculum Learning for FedFR using CR-FIQA Scores
+# Curriculum Learning for FedFR using CR-FIQA Score
 This repository presents a curriculum learning framework for Federated Face Recognition (FedFR), leveraging **CR-FIQA** scores to guide the training process.
 
 Paper: [CR-FIQA paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Boutros_CR-FIQA_Face_Image_Quality_Assessment_by_Learning_Sample_Relative_Classifiability_CVPR_2023_paper.pdf)
