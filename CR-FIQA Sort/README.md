@@ -5,7 +5,7 @@ This section explains how **Certainty Ratio Face Image Quality Assessment (CR-FI
 - 📄 **Paper**: [CR-FIQA: Face Image Quality Assessment by Learning Sample Relative Classifiability](https://openaccess.thecvf.com/content/CVPR2023/html/Boutros_CR-FIQA_Face_Image_Quality_Assessment_by_Learning_Sample_Relative_Classifiability_CVPR_2023_paper.html)  
 - 💻 **Code**: [CR-FIQA GitHub Repository](https://github.com/fdbtrs/CR-FIQA)
 
-<img src="CRFIQA_sort.png" alt="CR-FIQA Sorting Visualization">
+<img src="CRFIQA_sort.png" alt="CR-FIQA Sorting">
 
 ## Overview
 
