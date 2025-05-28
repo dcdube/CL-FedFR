@@ -1,4 +1,4 @@
-# Curriculum Learning for Federated Face Recognition
+# Federated Face Recognition using Curriculum Learning
 
 This work proposes a federated FR framework that uses curriculum learning to sort the images from “easy” to “difficult” during training. Two distinct curricula are considered: Face image quality assessment (FIQA) scores and head rotation. The performance of these curriculum designs is assessed both for fully-supervised and semi-supervised federated face recognition setups.
 
@@ -27,11 +27,14 @@ We sort the images from "easy" to "difficult" based on face image quality scores
 See the [CR-FIQA Sort](https://github.com/dcdube/CL-FedFR/tree/main/CR-FIQA%20Sort) folder for more details.
 
 ## Fully-Supervised Training
-We use the [FedFR](https://github.com/jackie840129/FedFR) algorithm for all the fully-supervised training approaches as follows:
+We use the [FedFR](https://github.com/jackie840129/FedFR) algorithm for all the fully-supervised training approaches for each curriculum as follows:
    - **Stage 1**: Train the model on **Subset 1**.
    - **Stage 2**: Initialize with **Stage 1** parameters and continue training on all samples (**Subset 1 + Subset 2**).
 
 ## Semi-Supervised Training
+We use the **SS-FedFR** algorithm for all the semi-supervised training approaches for each curriculum as follows:
+   - **Stage 1**: Train the model on **Subset 1**.
+   - **Stage 2**: Initialize with **Stage 1** parameters and continue training on all samples (**Subset 1 + Subset 2**).
 
 See the [SS-FedFR](https://github.com/dcdube/CL-FedFR/tree/main/SS-FedFR) folder for more details.
 
