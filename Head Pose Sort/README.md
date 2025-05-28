@@ -56,12 +56,12 @@ We sort dataset images from "easy" to "difficult" based on head pose angles. The
 
 ## Curriculum Strategy
 
-**Sorting**: For each client, images are ranked by the sum of absolute head pose angles.
-**Subset Splitting**:
+- **Sorting**: For each client, images are ranked by the sum of absolute head pose angles.
+- **Subset Splitting**:
 We tried different splitting criteria but the best results were obtained using the following as shown in our [preliminary work](https://www.scitepress.org/Papers/2024/125740/125740.pdf):
    - 🟩 **Easy samples**: Top 50% with the smallest pose angles.
    - 🟥 **Difficult samples**: Bottom 50% with larger pose angles.
-**Training Process**:
+- **Training Process**:
    - **Stage 1**: Train the model on easy samples.
    - **Stage 2**: Initialize with Stage 1 parameters and continue training on all samples.
 
