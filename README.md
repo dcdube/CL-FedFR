@@ -2,7 +2,7 @@
 
 This work proposes a federated FR framework that uses curriculum learning to sort the images from “easy” to “difficult” during training. Two distinct curricula are considered: Face image quality assessment (FIQA) scores and head rotation. The performance of these curriculum designs is assessed both for fully-supervised and semi-supervised federated face recognition setups.
 
-<img src="figures/CL_FedFR.png"> 
+<img src="figures/CRFIQA-FedFR.png"> 
 
 ## Head Rotation-based Curriculum
 We sort the images from "easy" to "difficult" based on head pose angles. The difficulty is estimated by computing the sum of the absolute values of the pitch, yaw, and roll angles using the [OpenFace 2.0](https://github.com/TadasBaltrusaitis/OpenFace) toolkit.
