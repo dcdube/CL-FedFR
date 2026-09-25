@@ -13,6 +13,17 @@ We used a similar strategy to select a subset of the [MS-Celeb-1M](https://doi.o
 
 Put the pretrained model (["backbone.pth"](https://drive.google.com/file/d/19d-Qm-RkBh9E2P1o_ZbdrHAyoZocFZbK/view?usp=sharing)) under the `pretrain/` folder.
 
+## CL Split
+
+To split the dataset based on the CR-FIQA or head rotation (HR), we used the following scripts.
+```
+python3 split_FL_CRFIQA.py --input_dir './ms1m_split/CR-FIQA' --output_dir './ms1m_split/CR-FIQA_50' --score_csv './ms1m_split/CR-FIQA/split_train_i4000c0040/CRFIQA_local.csv' --num_ID 4000 --num_client 40 --percentage 50
+```
+
+```
+python3 split_FL_HR.py --input_dir './ms1m_split/headpose' --output_dir './ms1m_split/headpose_50' --score_csv './ms1m_split/headpose/split_train_i4000c0040/headpose_local.csv' --num_ID 4000 --num_client 40 --percentage 50
+```
+
 ## Semi-Supervised Learning
 
 - Pseudo-labeling:
@@ -31,19 +42,19 @@ The personalized performance was evaluated on the [MS-Celeb-1M](https://doi.org/
 
 ### 1:1 Evaluation
 ```
-python3 local_all.py --backbone 'multi' --task '1:1' --ckpt_path '/home/master/SS-FedFR/ckpt/FedFR' --data_dir '/home/master/SS-FedFR/ms1m_split/local_veri_4000' --gallery '/home/master/SS-FedFR/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
+python3 local_all.py --backbone 'multi' --task '1:1' --ckpt_path './ckpt/FedFR' --data_dir './ms1m_split/local_veri_4000' --gallery './ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
 ```
 
 ### 1:n Evaluation
 ```
-python3 local_all.py --backbone 'multi' --task '1:n' --ckpt_path '/home/master/SS-FedFR/ckpt/FedFR' --data_dir '/home/master/SS-FedFR/ms1m_split/local_veri_4000' --gallery '/home/master/SS-FedFR/ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
+python3 local_all.py --backbone 'multi' --task '1:n' --ckpt_path './ckpt/FedFR' --data_dir './ms1m_split/local_veri_4000' --gallery './ms1m_split/local_gallery_4000' --epoch -1 --num_client 40 --gpu 0 1 2 3
 ```
 
 ## Generic Evaluation
 
 The generic performance was evaluated on the [IJB-C](https://ieeexplore.ieee.org/abstract/document/8411217) dataset. We performed 'both' '1:1' or '1:n generic evaluations. Make sure to change the paths.
 ```
-python3 ijbc_conti.py --root_path '/media/master/SS-FedFR/IJBC' --ckpt_dir '/home/master/SS-FedFR/ckpt/FedFR' --epoch 17 18 19 --gpu 0 1 2 3 --job 'both'
+python3 ijbc_conti.py --root_path '/media/master/SS-FedFR/IJBC' --ckpt_dir './ckpt/FedFR' --epoch 17 18 19 --gpu 0 1 2 3 --job 'both'
 ```
 
 ## References
